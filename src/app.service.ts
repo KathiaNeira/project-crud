@@ -9,34 +9,41 @@ export class AppService {
   constructor() {
     this.users = [
         {
-          "id": 2,
-          "name": "Batman"
+          "id": 1,
+          "name": "Carla"
         },
         {
-          "id": 4,
-          "name": "Flash"
+          "id": 2,
+          "name": "José"
         },
         {
           "id": 3,
-          "name": "Superman"
+          "name": "Pedro"
         }
     ];
   }
 
-  async findAll(): Promise<User | undefined> {
+  findAll(): any {
     return this.users;
   }
 
-  async findOne(name): Promise<User | undefined> {
-    return this.users.find(user => user.name === name);
+  async findOne(param): Promise<User | undefined> {
+    return this.users.find(user => user.name === param.name);
   }
 
-  async delete(id): Promise<User> {
-    this.users
+  async delete(param): Promise<User> {
+    let count = 0;
+    this.users.filter((item, index) => {
+      if (item.id === param.id) {
+        count = index;
+      }
+    });
+    this.users.splice(count, 1);
+    return this.users;
   }
 
   async create(data): Promise<User> {
-    this.users.push(data)
+    this.users.push(data);
+    return this.users;
   }
-  
 }

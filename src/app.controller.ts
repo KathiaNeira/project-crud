@@ -2,10 +2,9 @@ import {
   Controller,
   Get,
   Post,
-  Param,
   Query,
-  Body,
-  Delete
+  Delete,
+  Body
 } from '@nestjs/common';
 import { AppService } from './app.service';
 
@@ -14,7 +13,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  findAll(): Promise<[]> {
+  findAll(): any {
     return this.appService.findAll();
   }
 
@@ -28,8 +27,8 @@ export class AppController {
     return this.appService.create(data)
   }
 
-  @Delete(':id/delete')
-    async delete(@Param('id') id): Promise<any> {
-      return this.appService.delete(id);
-    }  
+  @Delete('/delete')
+    async delete(@Body() data): Promise<any> {
+      return this.appService.delete(data);
+  }
 }
