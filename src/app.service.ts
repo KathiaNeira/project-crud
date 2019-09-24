@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from './user.entity';
+import { User } from './user/user.entity';
+import { UserInterface } from './interface/user';
 
 @Injectable()
 export class AppService {
@@ -9,7 +10,7 @@ export class AppService {
     @InjectRepository(User) private usersRepository: Repository<User>
     ) { }
 
-  create(user: any) {
+  create(user: UserInterface) {
     return this.usersRepository.save(user);
   }
 
